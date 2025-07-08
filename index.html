@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<style>
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+.interior-benefits-block {
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* ocupa toda altura da tela */
+}
+
+.interior-image,
+.benefits,
+.car-info {
+    flex: 1; /* cada bloco vai dividir igualmente o espaço */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+/* Opcional: ajustes específicos */
+#interior-car-image {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+}
+.editable-text,
+.editable-image,
+#edit-panel .editable-text,
+#edit-panel .editable-image {
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+
+
+</style>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Template de Carro - Editável</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Seção Superior - Imagens do Carro -->
+        <div class="car-images-section">
+            <div class="main-car-image">
+                <img id="front-car-image" src="https://via.placeholder.com/600x400/f0f0f0/666?text=Imagem+Frontal+do+Carro" alt="Vista frontal do carro" class="editable-image">
+                <div class="ipva-badge">
+                    <span class="editable-text" id="ipva-text">IPVA</span>
+                    <span class="editable-text" id="ipva-status">PAGO</span>
+                </div>
+            </div>
+            <div class="secondary-car-image">
+                <img id="side-car-image" src="https://via.placeholder.com/600x400/f0f0f0/666?text=Imagem+Lateral+do+Carro" alt="Vista lateral do carro" class="editable-image">
+            </div>
+        </div>
+
+        <div class="car-info-section" style="display: flex; justify-content: space-between;">
+        <div class="interior-benefits-block">
+            <div class="interior-image" style="width: fit-content;">
+                <img id="interior-car-image" 
+                     src="https://via.placeholder.com/200x150/f0f0f0/666?text=Interior"
+                     alt="Interior do carro"
+                     style="width: 266px; height: 200px; object-fit: cover; display: block;">
+              </div>
+              
+			<div class="benefits">
+                    <div class="benefit-item">
+                        <span class="benefit-icon">🏠</span>
+                        <span class="editable-text" id="benefit-1">EMPLACAMENTO CORTESIA</span>
+                    </div>
+                    <div class="benefit-item">
+                        <span class="benefit-icon">⭕</span>
+                        <span class="editable-text" id="benefit-2">TAXA ZERO EM ATÉ 12X</span>
+                    </div>
+                    <div class="benefit-item">
+                        <span class="benefit-icon">👤</span>
+                        <span class="editable-text" id="benefit-3">3 ANOS DE GARANTIA</span>
+                    </div>
+            </div>
+         
+        </div>
+		   <div class="car-info">
+                <div class="car-brand-model">
+                    <h1 class="editable-text" id="car-brand">CHEVROLET</h1>
+                    <h2 class="editable-text" id="car-model">ONIX</h2>
+                    <p class="editable-text" id="car-version">LT2 MANUAL 1.0 FLEX 25/25</p>
+                </div>
+                
+                <div class="car-specs">
+                    <p class="editable-text" id="engine-spec">1.0 NATURAL</p>
+                    <p class="editable-text" id="power-spec">82 CV</p>
+                    <p class="editable-text" id="mileage-spec">ZERO KM</p>
+                    <p class="editable-text" id="wheels-spec">Rodas de Liga leve Aro 15"</p>
+                    <p class="editable-text" id="transmission-spec">Câmbio Manual de 6 velocidades</p>
+                </div>               
+                <div class="pricing">
+                    <p class="original-price">
+                        De <span class="editable-text" id="original-price">R$ 101.790,00</span>
+                    </p>
+                    <h3 class="current-price editable-text" id="current-price">R$ 94.900,00</h3>
+                </div>
+            </div>
+        </div>
+        <!-- Seção Inferior - Informações da Concessionária -->
+        <div class="dealership-section">
+            <div class="dealership-name">
+                <h4 class="editable-text" id="dealership-name">SINOSCAR S/A</h4>
+            </div>
+            <div class="dealership-location">
+                <h5 class="editable-text" id="dealership-city">São Leopoldo</h5>
+                <p class="editable-text" id="dealership-address">Av. Getúlio Vargas, 2555 - São João Batista, São Leopoldo - RS, 93025-750</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Painel de Edição -->
+    <div class="edit-panel" id="edit-panel">
+        <h3>Painel de Edição</h3>
+        <div class="edit-controls">
+            <button onclick="toggleEditMode()" id="edit-toggle">Ativar Edição</button>
+            <button onclick="saveTemplate()" id="save-btn" style="display: none;">Salvar</button>
+            <button onclick="resetTemplate()" id="reset-btn" style="display: none;">Resetar</button>
+        </div>
+        <div class="image-upload-section" id="image-upload-section" style="display: none;">
+            <h4>Trocar Imagens</h4>
+            <div class="upload-group">
+                <label for="front-upload">Imagem Frontal:</label>
+                <input type="file" id="front-upload" accept="image/*" onchange="changeImage('front-car-image', this)">
+            </div>
+            <div class="upload-group">
+                <label for="side-upload">Imagem Lateral:</label>
+                <input type="file" id="side-upload" accept="image/*" onchange="changeImage('side-car-image', this)">
+            </div>
+            <div class="upload-group">
+                <label for="interior-upload">Imagem Interior:</label>
+                <input type="file" id="interior-upload" accept="image/*" onchange="changeImage('interior-car-image', this)">
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+<script>
+    function exportToImage() {
+        html2canvas(document.querySelector(".container")).then(canvas => {
+            const link = document.createElement('a');
+            link.download = 'carro.png';
+            link.href = canvas.toDataURL();
+            link.click();
+        });
+    }
+</script>
+<button onclick="exportToImage()">Baixar como Imagem</button>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+    async function exportToPDF() {
+        const canvas = await html2canvas(document.querySelector(".container"));
+        const imgData = canvas.toDataURL('image/png');
+
+        const { jsPDF } = window.jspdf;
+        const pdf = new jsPDF();
+
+        const imgProps = pdf.getImageProperties(imgData);
+        const pdfWidth = pdf.internal.pageSize.getWidth();
+        const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+
+        pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+        pdf.save("carro.pdf");
+    }
+</script>
+<button onclick="exportToPDF()">Baixar como PDF</button>
+
+</body>
+</html>
+
