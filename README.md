@@ -1,4 +1,3 @@
-# Template Web Editável para Carros
 
 Este é um template web responsivo e editável para exibição de carros em concessionárias, baseado no layout fornecido. O template permite a edição de textos e troca de imagens mantendo as proporções e o design original.
 
@@ -116,4 +115,3 @@ Este template foi criado para ser intuitivo e fácil de usar. Em caso de dúvida
 ---
 
 **Desenvolvido com HTML5, CSS3 e JavaScript puro para máxima compatibilidade e performance.**
-
