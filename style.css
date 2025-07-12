@@ -28,6 +28,49 @@ body {
     gap: 0;
 }
 
+/* Correções para manter proporções das imagens */
+#front-car-image,
+#side-car-image {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    width: auto;
+    height: auto;
+}
+
+.main-car-image,
+.secondary-car-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.interior-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 266px;
+    max-height: 200px;
+}
+
+/* CSS específico para captura de imagem e PDF */
+@media print, screen {
+    img {
+        max-width: 100% !important;
+        height: auto !important;
+        object-fit: contain !important;
+    }
+}
+
+/* Garantir que as imagens não sejam distorcidas durante a captura */
+.main-car-image img,
+.secondary-car-image img,
+.interior-image img {
+    aspect-ratio: auto;
+    object-position: center;
+}
+
 .main-car-image {
     position: relative;
     width: 100%;
